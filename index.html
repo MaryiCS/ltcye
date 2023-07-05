@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulario de emprendimiento</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      background-image: url('https://github.com/MaryiCS/IMAGENES/blob/main/Cover_librodetrabajo.png?raw=true');
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      color: #0A0A00;
+    }
+
+    h1  {
+      font-family: Arial, sans-serif;
+      font-size: 60px;
+      color: #354374;
+    }
+     h2{
+      font-family: Arial, sans-serif;
+      font-size: 40px;
+      color: #354374;
+    }
+
+    h3{
+      font-family: Arial, sans-serif;
+      font-size: 20px;
+      color: #354374;
+    }
+    .slide {
+      flex-grow: 1;
+      display: none;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .slide:first-child {
+      text-align: center;
+      font-size:20px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 15px;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 5px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+  <script>
+    var currentSlide = 0;
+    var completedSlides = [];
+
+    function showSlide(n) {
+      var slides = document.getElementsByClassName('slide');
+      slides[currentSlide].classList.remove('active');
+      slides[n].classList.add('active');
+      currentSlide = n;
+    }
+
+    function nextSlide() {
+      var slides = document.getElementsByClassName('slide');
+      if (currentSlide < slides.length - 1) {
+        // Marcar la diapositiva actual como completada
+        completedSlides[currentSlide] = true;
+        showSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        showSlide(currentSlide - 1);
+      }
+    }
+
+    function allSlidesCompleted() {
+      return completedSlides.every(function(slide) {
+        return slide === true;
+      });
+    }
+
+    function saveAsPDF() {
+      if (allSlidesCompleted()) {
+        var doc = new jsPDF();
+        var slides = document.getElementsByClassName('slide');
+        for (var i = 0; i < slides.length; i++) {
+          doc.text(slides[i].textContent, 10, 10 + i * 10);
+        }
+        doc.save('output.pdf');
+      } else {
+        alert('Por favor completa todas las diapositivas antes de guardar.');
+      }
+    }
+
+    window.onload = function() {
+      var slides = document.getElementsByClassName('slide');
+      slides[currentSlide].classList.add('active');
+      completedSlides = Array(slides.length).fill(false);
+    }
+  </script>
+</head>
+<body>
+
+
+<div class="slide">
+  <h1>LIBRO DE TRABAJO</h1>
+
+  <ul>
+    <!-- Campos del usuario repetidos 5 veces -->
+      <li>
+        <label>
+          Nombre completo:
+          <input type="text" name="nombre1" required>
+        </label>
+        <label>
+          Identificación:
+          <input type="text" name="identificacion1" required>
+        </label>
+        <label>
+          Correo institucional:
+          <input type="email" name="correo1" required>
+        </label>
+      </li>
+      <li>
+        <label>
+          Nombre completo:
+          <input type="text" name="nombre2" required>
+        </label>
+        <label>
+          Identificación:
+          <input type="text" name="identificacion2" required>
+        </label>
+        <label>
+          Correo institucional:
+          <input type="email" name="correo2" required>
+        </label>
+      </li>
+      <li>
+        <label>
+          Nombre completo:
+          <input type="text" name="nombre3" required>
+        </label>
+        <label>
+          Identificación:
+          <input type="text" name="identificacion3" required>
+        </label>
+        <label>
+          Correo institucional:
+          <input type="email" name="correo3" required>
+        </label>
+      </li>
+      <li>
+        <label>
+          Nombre completo:
+          <input type="text" name="nombre4" required>
+        </label>
+        <label>
+          Identificación:
+          <input type="text" name="identificacion4" required>
+        </label>
+        <label>
+          Correo institucional:
+          <input type="email" name="correo4" required>
+        </label>
+      </li>
+      <li>
+        <label>
+          Nombre completo:
+          <input type="text" name="nombre5" required>
+        </label>
+        <label>
+          Identificación:
+          <input type="text" name="identificacion5" required>
+        </label>
+        <label>
+          Correo institucional:
+          <input type="email" name="correo5" required>
+        </label>
+      </li>
+
+
+
+
+        <ul>
+        </div>
+        
+        <div class="slide">
+      <h1>IDEA</h1>
+      <p>¿En qué sector te gustaría emprender?</p>
+      <input type="checkbox" name="sector" value="Producción"> Producción<br>
+      <input type="checkbox" name="sector" value="Agroindustria"> Agroindustria<br>
+      <input type="checkbox" name="sector" value="Servicios"> Servicios<br>
+      <input type="checkbox" name="sector" value="Mis intereses"> Mis intereses<br>
+      <input type="checkbox" name="sector" value="Mi experiencia"> Mi experiencia<br>
+      <input type="checkbox" name="sector" value="Negocios que hay en mi localidad"> Negocios que hay en mi localidad<br>
+      <input type="checkbox" name="sector" value="Tendencias"> Tendencias<br>
+    </li>
+    <li>
+      <label>¿Cuáles son tus intereses?<br>
+        <textarea name="intereses"></textarea>
+      </label>
+    </li>
+    <li>
+      <label>¿Qué experiencia tienes en temas de emprendimiento?<br>
+        <textarea name="experiencia"></textarea>
+      </label>
+    </li>
+    <li>
+      <label>¿Qué tipo de negocios hay en tu localidad?<br>
+        <textarea name="negociosLocalidad"></textarea>
+      </label>
+    </li>
+    <li>
+      <label>¿Qué necesidad quisieras resolver?<br>
+        <textarea name="necesidadResolver"></textarea>
+      </label>
+    </li>
+    <li>
+      <label>
+        ¿Tienes interés por desarrollar una idea de emprendimiento?
+        <input type="radio" name="interesEmprender" value="Si"> Si
+        <input type="radio" name="interesEmprender" value="No"> No
+      </label>
+    </li>
+    <li>
+      <label>
+        ¿Estás dispuest@ a desarrollar un prototipo?
+        <input type="radio" name="desarrollarPrototipo" value="Si"> Si
+        <input type="radio" name="desarrollarPrototipo" value="No"> No
+      </label>
+    </li>
+    <li>
+      <label>
+        ¿Te gustaría una idea amigable con el medio ambiente?
+        <input type="radio" name="ideaEcoFriendly" value="Si"> Si
+        <input type="radio" name="ideaEcoFriendly" value="No"> No
+      </label>
+    </li>
+    <li>
+      <label>
+        ¿Puede ser tu actividad principal en los próximos años?
+        <input type="radio" name="actividadPrincipal" value="Si"> Si
+        <input type="radio" name="actividadPrincipal" value="No"> No
+      </label>
+    </li>
+    <li>
+      <label>
+        ¿Tienes una red fuerte (física y/o digital) que te ayude a desarrollar una idea?
+        <input type="radio" name="redfuerte" value="Si"> Si
+        <input type="radio" name="redfuerte" value="No"> No
+        <label>
+            ¿Cuentas con los recursos físicos para el desarrollo de la idea?
+            <input type="radio" name="recursosFisicos" value="Si"> Si
+            <input type="radio" name="recursosFisicos" value="No"> No
+          </label>
+        </li>
+        <li>
+          <label>
+            ¿Cuentas con los recursos financieros para el desarrollo de la idea?
+            <input type="radio" name="recursosFinancieros" value="Si"> Si
+            <input type="radio" name="recursosFinancieros" value="No"> No
+          </label>
+        </li>
+        <li>
+          <label>
+            ¿Tienes idea de cómo buscar o adquirir más recursos?
+            <input type="radio" name="buscarRecursos" value="Si"> Si
+            <input type="radio" name="buscarRecursos" value="No"> No
+          </label>
+        </li>
+        <li>
+          <label>
+            ¿Eres consciente del tiempo y el esfuerzo requeridos para el desarrollo de la idea?
+            <input type="radio" name="tiempoEsfuerzo" value="Si"> Si
+            <input type="radio" name="tiempoEsfuerzo" value="No"> No
+          </label>
+        </li>
+        <li>
+          <label>
+            ¿Conoces las características del sector donde se desarrollará la idea?
+            <input type="radio" name="caracteristicasSector" value="Si"> Si
+            <input type="radio" name="caracteristicasSector" value="No"> No
+          </label>
+        </li>
+        <li>
+          <label>
+            ¿Conoces el territorio donde quieres desarrollar la idea?
+            <input type="radio" name="conocimientoTerritorio" value="Si"> Si
+            <input type="radio" name="conocimientoTerritorio" value="No"> No
+          </label>
+        </li>
+        <li>
+          <label>
+            ¿Conoces la competencia directa e indirecta?
+            <input type="radio" name="conocimientoCompetencia" value="Si"> Si
+            <input type="radio" name="conocimientoCompetencia" value="No"> No
+          </label>
+        </li>
+        <li>
+          <label>
+            ¿Tienes idea de cuánto cuesta para producir, cuánto puedes vender y a qué precio?
+            <input type="radio" name="ideaCostos" value="Si"> Si
+            <input type="radio" name="ideaCostos" value="No"> No
+          </label>
+        </li>
+        <li>
+          <label>
+            ¿Hay mercado?
+            <input type="radio" name="hayMercado" value="Si"> Si
+            <input type="radio" name="hayMercado" value="No"> No
+          </label>
+        </li>
+        <li>
+          <label>
+            ¿Incluye innovación?
+            <input type="radio" name="incluyeInnovacion" value="Si"> Si
+            <input type="radio" name="incluyeInnovacion" value="No"> No
+          </label>
+        </li>
+        <li>
+            <p>¿Con cuál objetivo de desarrollo sostenible te identificas más?</p>
+            <input type="checkbox" name="objetivo" value="Objetivo 1"> 1.- Erradicar la pobreza en todas sus formas en todo el mundo.<br>
+            <input type="checkbox" name="objetivo" value="Objetivo 2"> 2.- Poner fin al hambre, conseguir la seguridad alimentaria y una mejor nutrición, y promover la agricultura sostenible.<br>
+            <input type="checkbox" name="objetivo" value="Objetivo 3"> 3.- Garantizar una vida saludable y promover el bienestar para todos para todas las edades.<br>
+            <input type="checkbox" name="objetivo" value="Objetivo 4"> 4.- Garantizar una educación de calidad inclusiva y equitativa, y promover las oportunidades de aprendizaje permanente para todos.<br>
+            <input type="checkbox" name="objetivo" value="Objetivo 5"> 5.- Alcanzar la igualdad entre los géneros y empoderar a todas las mujeres y niñas.<br>
+            <input type="checkbox" name="objetivo" value="Objetivo 6"> 6.- Garantizar la disponibilidad y la gestión sostenible del agua y el saneamiento para todos.<br>
+            <input type="checkbox" name="objetivo" value="Objetivo 7"> 7.- Asegurar el acceso a energías asequibles, fiables, sostenibles y modernas para todos.<br>
+            <input type="checkbox" name="objetivo" value="Objetivo 8"> 8.- Fomentar el crecimiento económico sostenido, inclusivo y sostenible, el empleo pleno y productivo, y el trabajo decente para todos.<br>
+            <input type="checkbox" name="objetivo" value="Objetivo 9"> 9.- Desarrollar infraestructuras resilientes, promover la industrialización inclusiva y sostenible, y fomentar la innovación.<br>
+            <input type="checkbox" name="objetivo" value="Objetivo 10"> 10.- Reducir las desigualdades entre países y dentro de ellos.<br>
+            <input type="checkbox" name="objetivo" value="Objetivo 11"> 11.- Conseguir que las ciudades y los asentamientos humanos sean inclusivos, seguros, resilientes y sostenibles.<br>
+            <input type="checkbox" name="objetivo" value="Objetivo 12"> 12.- Garantizar las pautas de consumo y de producción sostenible.<br>
+            <input type="checkbox" name="objetivo" value="Objetivo 13"> 13.- Tomar medidas urgentes para combatir el cambio climático y sus efectos.<br>
+            <input type="checkbox" name="objetivo" value="Objetivo 14"> 14.- Conservar y utilizar de forma sostenible los océanos, mares y recursos marinos para lograr el desarrollo sostenible.<br>
+            <input type="checkbox" name="objetivo" value="Objetivo 15"> 15.- Proteger, restaurar y promover la utilización sostenible de los ecosistemas terrestres, gestionar de manera sostenible los bosques, combatir la desertificación y detener y revertir la degradación de la tierra, y frenar la pérdida de diversidad biológica.<br>
+            <input type="checkbox" name="objetivo" value="Objetivo 16"> 16.- Promover sociedades pacíficas e inclusivas para el desarrollo sostenible, facilitar acceso a la justicia para todos y crear instituciones eficaces, responsables e inclusivas a todos los niveles.<br>
+            <input type="checkbox" name="objetivo" value="Objetivo 17"> 17.- Fortalecer los medios de ejecución y reavivar la alianza mundial para el desarrollo sostenible.<br>
+            <li>
+
+
+            </div>
+
+
+ 
+            <div class="slide">
+              <h1>MATRIZ DOFA</h1>
+              <table style="width:100%;">
+                <tr>
+                  <td>
+                    <h2>Debilidades</h2>
+                    <textarea style="width:100%; height:100px;"></textarea>
+                  </td>
+                  <td>
+                    <h2>Oportunidades</h2>
+                    <textarea style="width:100%; height:100px;"></textarea>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <h2>Fortalezas</h2>
+                    <textarea style="width:100%; height:100px;"></textarea>
+                  </td>
+                  <td>
+                    <h2>Amenazas</h2>
+                    <textarea style="width:100%; height:100px;"></textarea>
+                  </td>
+                </tr>
+              </table>
+              <h2>Estrategias cruzadas:</h1>
+              <h2>Estrategia Ofensiva: Fuerzas x Oportunidad</h2>
+              <textarea style="width:100%; height:50px;"></textarea>
+              <h2>Estrategia de Confrontación: Fuerzas vs. Amenazas</h2>
+              <textarea style="width:100%; height:50px;"></textarea>
+              <h2>Estrategia de Refuerzo: Debilidades x Oportunidades</h2>
+              <textarea style="width:100%; height:50px;"></textarea>
+              <h2>Estrategia Defensiva – Debilidades x Amenazas</h2>
+              <textarea style="width:100%; height:50px;"></textarea>
+            </div>
+                 
+
+            <div class="slide">
+              <h1>PITCH</h1>
+              <table align="center">
+                  <!-- ASPECTOS BÁSICOS -->
+                  <tr><td colspan="2"><h1>ASPECTOS BÁSICOS</h1></td></tr>
+                  <tr><td>Nombre de la iniciativa</td><td><textarea id="nombreIniciativa" style="resize:both;"></textarea></td></tr>
+                  <tr><td>Es (un producto (plataforma, aplicación, marketplace, ERP, CRM))</td><td><textarea id="tipoProducto" style="resize:both;"></textarea></td></tr>
+                  <tr><td>Para (tipo cliente/usuario)</td><td><textarea id="tipoCliente" style="resize:both;"></textarea></td></tr>
+                  <tr><td>Para (Beneficio clave)</td><td><textarea id="beneficioClave" style="resize:both;"></textarea></td></tr>
+          
+                  <!-- PROBLEMA -->
+                  <tr><td colspan="2"><h1>PROBLEMA</h1></td></tr>
+                  <tr><td>¿De qué se trata el problema?</td><td><textarea id="descripcionProblema" style="resize:both;"></textarea></td></tr>
+                  <tr><td>¿Quién está sufriendo el problema?</td><td><textarea id="quienSufre" style="resize:both;"></textarea></td></tr>
+                  <tr><td>¿Qué tan grande es el problema?</td><td><textarea id="magnitudProblema" style="resize:both;"></textarea></td></tr>
+          
+                  <!-- SOLUCIÓN -->
+                  <tr><td colspan="2"><h1>SOLUCIÓN</h1></td></tr>
+                  <tr><td>¿Qué es la solución?</td><td><textarea id="descripcionSolucion" style="resize:both;"></textarea></td></tr>
+                  <tr><td>¿Cuál es el producto o la tecnología que implementan?</td><td><textarea id="productoTecnologia" style="resize:both;"></textarea></td></tr>
+                  <tr><td>¿Cómo funciona?</td><td><textarea id="comoFunciona" style="resize:both;"></textarea></td></tr>
+          
+                  <!-- MODELO DE NEGOCIO -->
+                  <tr><td colspan="2"><h1>MODELO DE NEGOCIO</h1></td></tr>
+                  <tr><td>¿Cómo se financiará la iniciativa?</td><td><textarea id="financiamiento" style="resize:both;"></textarea></td></tr>
+                  <tr><td>¿Quiénes son los financiadores?</td><td><textarea id="financiadores" style="resize:both;"></textarea></td></tr>
+                  <tr><td>¿Cómo lo van a comunicar?</td><td><textarea id="comunicacion" style="resize:both;"></textarea></td></tr>
+          
+                  <!-- TRACCIÓN -->
+                  <tr><td colspan="2"><h1>TRACCIÓN</h1></td></tr>
+                  <tr><td>¿Cuáles son sus métricas clave?</td><td><textarea id="metricasClave" style="resize:both;"></textarea></td</tr>
+                  <tr><td>Medidas y progresión</td><td><textarea id="medidasProgresion" style="resize:both;"></textarea></td></tr>
+          
+                  <!-- EQUIPO -->
+                  <tr><td colspan="2"><h1>EQUIPO</h1></td></tr>
+                  <tr><td>¿Qué han aprendido hasta ahora?</td><td><textarea id="aprendizaje" style="resize:both;"></textarea></td></tr>
+                  <tr><td>¿Qué los hace el 'mejor equipo'?</td><td><textarea id="mejorEquipo" style="resize:both;"></textarea></td></tr>
+          
+                  <!-- PREGUNTAS -->
+                  <tr><td colspan="2"><h1>PREGUNTAS</h1></td></tr>
+                  <tr><td>¿A dónde quieren llegar?</td><td><textarea id="dondeLlegar" style="resize:both;"></textarea></td></tr>
+                  <tr><td>¿Qué necesitan? ¿Cuánto? ¿Para qué?</td><td><textarea id="queNecesitan" style="resize:both;"></textarea></td></tr>
+                  <tr><td>¿Cómo se desarrolla esta propuesta en entornos digitales?</td><td><textarea id="entornosDigitales" style="resize:both;"></textarea></td></tr>
+              </table>
+          
+              <button onclick="generarMensaje()">PITCH CONSOLIDADO</button>
+              <p id="mensajeSalida" style="margin: auto; width: 50%; text-align: center;"></p>
+          </div>
+          <script>
+            function generarMensaje() {
+                var nombreIniciativa = document.getElementById("nombreIniciativa").value;
+                var tipoProducto = document.getElementById("tipoProducto").value;
+                var tipoCliente = document.getElementById("tipoCliente").value;
+                var beneficioClave = document.getElementById("beneficioClave").value;
+                var descripcionProblema = document.getElementById("descripcionProblema").value;
+                var quienSufre = document.getElementById("quienSufre").value;
+                var magnitudProblema = document.getElementById("magnitudProblema").value;
+                var descripcionSolucion = document.getElementById("descripcionSolucion").value;
+                var productoTecnologia = document.getElementById("productoTecnologia").value;
+                var comoFunciona = document.getElementById("comoFunciona").value;
+                var financiamiento = document.getElementById("financiamiento").value;
+                var financiadores = document.getElementById("financiadores").value;
+                var comunicacion = document.getElementById("comunicacion").value;
+                var metricasClave = document.getElementById("metricasClave").value;
+                var medidasProgresion = document.getElementById("medidasProgresion").value;
+                var aprendizaje = document.getElementById("aprendizaje").value;
+                var mejorEquipo = document.getElementById("mejorEquipo").value;
+                var dondeLlegar = document.getElementById("dondeLlegar").value;
+                var queNecesitan = document.getElementById("queNecesitan").value;
+                var entornosDigitales = document.getElementById("entornosDigitales").value;
+        
+                var mensaje = "ASPECTOS BÁSICOS\nNombre de la iniciativa: " + nombreIniciativa + "\nEs un: " + tipoProducto + "\nPara: " + tipoCliente + "\nBeneficio clave: " + beneficioClave+ "\n\nPROBLEMA\nDe qué se trata el problema: " + descripcionProblema + "\nQuién está sufriendo el problema: " + quienSufre + "\nQué tan grande es el problema: " + magnitudProblema
+                + "\n\nSOLUCIÓN\nQué es la solución: " + descripcionSolucion + "\nCuál es el producto o la tecnología que implementan: " + productoTecnologia + "\nCómo funciona: " + comoFunciona
+                + "\n\nMODELO DE NEGOCIO\nCómo se financiará la iniciativa: " + financiamiento + "\nQuiénes son los financiadores: " + financiadores + "\nCómo lo van a comunicar: " + comunicacion
+                + "\n\nTRACCIÓN\nCuáles son sus métricas clave: " + metricasClave + "\nMedidas y progresión: " + medidasProgresion
+                + "\n\nEQUIPO\nQué han aprendido hasta ahora: " + aprendizaje + "\nQué los hace el 'mejor equipo': " + mejorEquipo
+                + "\n\nPREGUNTAS\nA dónde quieren llegar: " + dondeLlegar + "\nQué necesitan: " + queNecesitan + "\nCómo se desarrolla esta propuesta en entornos digitales: " + entornosDigitales;
+        
+                document.getElementById("mensajeSalida").innerText = mensaje;
+            }
+        </script>
+                  
+
+                  <div class="slide">
+                    <h1>DESCRIPCIÓN DEL EQUIPO</h1>
+                    <table style="width:100%; margin:auto;">
+                        <tr>
+                            <th>Miembros del equipo</th>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                        </tr>
+                        <tr>
+                            <th>Programa académico al que pertenece</th>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                        </tr>
+                        <tr>
+                            <th>Perfil público</th>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                        </tr>
+                        <tr>
+                            <th>¿Tiene experiencia o ha trabajado en la idea que está proponiendo?</th>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                        </tr>
+                        <tr>
+                            <th>Rol</th>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                        </tr>
+                        <tr>
+                            <th>Biografía</th>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td>
+                            <td><textarea style="resize:both;"></textarea></td> 
+                            <td><textarea style="resize:both;"></textarea></td> 
+                        </tr>
+                    </table>
+                </div>
+                 
+                <div class="slide">
+                
+                  <H1>BUSINESS MODEL CANVAS</h1>
+                
+                    <title>Modelo de Negocio Canvas</title>
+                  </head>
+                  <body>
+                  
+                  <form action="/submit" method="post">
+                  
+                  <h2>Propuesta de valor</h2>
+                  <h3>¿A qué se dedica la empresa, en qué consiste el producto o servicio que ofrece y qué necesidad logra satisfacer?</h3>
+                  <textarea name="value_proposition1" rows="4" cols="50"></textarea>
+                  
+                  <h3>Valor agregado: ¿Qué los diferencia de la competencia y cuáles son sus ventajas competitivas?</h3>
+                  <textarea name="value_proposition2" rows="4" cols="50"></textarea>
+                  
+                  <h3>Motivaciones de compra: ¿Por qué los clientes quieren su producto o servicio? Teniendo en cuenta factores básicos de Marketing como Precio, Producto, Plaza y Promoción.</h3>
+                  <textarea name="value_proposition3" rows="4" cols="50"></textarea>
+                  
+                  <h3>Valores corporativos: ¿Cuáles son los valores que los caracterizan?</h3>
+                  <textarea name="value_proposition4" rows="4" cols="50"></textarea>
+                  
+                  <h3>Otros</h3>
+                  <textarea name="value_proposition5" rows="4" cols="50"></textarea>
+                  
+                  
+                  <h2>Cliente</h2>
+                  <h3>Geográfica [País, Ciudad, Localidad, Barrios, Tamaño, Población, Clima]</h3>
+                  <textarea name="customer1" rows="4" cols="50"></textarea>
+                  
+                  <h3>Demográfica [Ingresos, Edad, Género. Estrato, Escolaridad, Ocupación]</h3>
+                  <textarea name="customer2" rows="4" cols="50"></textarea>
+                  
+                  <h3>Psicográficas [Gustos y preferencias del cliente]</h3>
+                  <textarea name="customer3" rows="4" cols="50"></textarea>
+                  
+                  <h3>Conductuales [Aspiraciones, Dolores, Beneficios, posible frecuencia de uso de tu producto o servicio,  Etapa de Preparación, Actitud hacia el producto, Otros factores]</h3>
+                  <textarea name="customer4" rows="4" cols="50"></textarea>
+                  
+                  <h3>Otros</h3>
+                  <textarea name="customer5" rows="4" cols="50"></textarea>
+                  
+                  <h2>Relación con el cliente</h2>
+                  <h3>Promociones</h3>
+                  <textarea name="customer_relationship1" rows="4" cols="50"></textarea>
+                  
+                  <h3>Condiciones y las formas de pago</h3>
+                  <textarea name="customer_relationship2" rows="4" cols="50"></textarea>
+                  
+                  <h3>Medios para publicidad</h3>
+                  <textarea name="customer_relationship3" rows="4" cols="50"></textarea>
+                  
+                  <h2>Canales</h2>
+                  <h3>Canales directos</h3>
+                  <textarea name="channels1" rows="4" cols="50"></textarea>
+                  
+                  <h3>Canales indirectos</h3>
+                  <textarea name="channels2" rows="4" cols="50"></textarea>
+                  
+                  <h3>Estrategias</h3>
+                  <textarea name="channels3" rows="4" cols="50"></textarea>
+                  
+                  <h3>Otros</h3>
+                  <textarea name="channels4" rows="4" cols=" 
+                  50"></textarea>
+
+<h2>Fuentes de ingreso</h2>
+<h3>¿Cuáles serán las fuentes de ingreso de mi producto o servicio?</h3>
+<textarea name="revenue1" rows="4" cols="50"></textarea>
+
+<h2>Estructura de costos</h2>
+<h3>¿Cuáles son los principales costos que tendría hoy para iniciar el desarrollo de mi producto o servicio?</h3>
+<textarea name="costs1" rows="4" cols="50"></textarea>
+
+<h3>Costos Fijos</h3>
+<textarea name="costs2" rows="4" cols="50"></textarea>
+
+<h3>Costos variables</h3>
+<textarea name="costs3" rows="4" cols="50"></textarea>
+
+<h3>Punto de equilibrio</h3>
+<textarea name="costs4" rows="4" cols="50"></textarea>
+
+<h2>Aliados clave</h2>
+<h3>Proveedores</h3>
+<textarea name="key_partners1" rows="4" cols="50"></textarea>
+
+<h3>Instituciones</h3>
+<textarea name="key_partners2" rows="4" cols="50"></textarea>
+
+<h3>Entidades financieras u otras</h3>
+<textarea name="key_partners3" rows="4" cols="50"></textarea>
+
+<h3>Otros</h3>
+<textarea name="key_partners4" rows="4" cols="50"></textarea>
+
+<h2>Actividades clave</h2>
+<h3>El producto o servicio consiste en</h3>
+<textarea name="key_activities1" rows="4" cols="50"></textarea>
+
+<h3>El proceso será</h3>
+<textarea name="key_activities2" rows="4" cols="50"></textarea>
+
+<h3>Las fortalezas contribuirán a las actividades porque</h3>
+<textarea name="key_activities3" rows="4" cols="50"></textarea>
+
+<h3>Las debilidades serán determinantes para las actividades clave porque</h3>
+<textarea name="key_activities4" rows="4" cols="50"></textarea>
+
+<h3>Las oportunidades contribuirán a las actividades porque</h3>
+<textarea name="key_activities5" rows="4" cols="50"></textarea>
+
+<h3>Las amenazas serán determinantes para las actividades clave porque</h3>
+<textarea name="key_activities6" rows="4" cols="50"></textarea>
+
+<h3>Los aspectos legales se verán reflejados en</h3>
+<textarea name="key_activities7" rows="4" cols="50"></textarea>
+
+<h3>Los competidores más fuertes son</h3>
+<textarea name="key_activities8" rows="4" cols="50"></textarea>
+
+<h3>Las características de los competidores mas fuertes son</h3>
+<textarea name="key_activities9" rows="4" cols="50"></textarea>
+
+<h3>Otros</h3>
+<textarea name="key_activities10" rows="4" cols="50"></textarea>
+
+<h2>Recursos</h2>
+<h3>Maquinaria y equipo</h3>
+<textarea name="resources1" rows="4" cols="50"></textarea>
+
+<h3>Muebles y enseres</h3>
+<textarea name="resources2" rows="4" cols="50"></textarea>
+
+<h3>Licencias y programas</h3>
+<textarea name="resources3" rows="4" cols="50"></textarea>
+
+<h3>Recurso humano - cargos y funciones</h3>
+<textarea name="resources4" rows="4" cols="50"></textarea>
+
+<h3>Otros</h3>
+<textarea name="resources5" rows="4" cols="50"></textarea>
+
+<input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
+ </div>   
+
+              <div class="slide">
+                <h1>Punto de equilibrio</h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div>   
+
+              <div class="slide">
+                <h1>Supuestos Financieros </h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div>    
+
+
+              <div class="slide">
+                <h1>Estado de situación financiera</h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div>   
+
+              <div class="slide">
+                <h1>Estado de resultados</h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div>   
+
+              <div class="slide">
+                <h1>Indicadores del negocio</h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div>   
+
+              <div class="slide">
+                <h1>Diseño de la propuesta de valor</h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div>   
+
+              <div class="slide">
+                <h1>Diseño de la propuesta de valor</h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div>   
+
+              <div class="slide">
+                <h1>Identificación y relación con el cliente</h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div>   
+
+              <div class="slide">
+                <h1>Recursos clave</h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div>   
+
+              <div class="slide">
+                <h1>Canales de comunicación</h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div>   
+
+              <div class="slide">
+                <h1>Análisis de competencia</h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div>   
+
+              <div class="slide">
+                <h1>Identificación y relación con socios</h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div>   
+
+              <div class="slide">
+                <h1>Análisis de audiencia</h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div>   
+
+              <div class="slide">
+                <h1>Experimentos</h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div>   
+
+              <div class="slide">
+                <h1>Prototipo</h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div>   
+
+              <div class="slide">
+                <h1>Pitch Final</h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div>   
+
+              <div class="slide">
+                <h1>Pitch deck</h1>
+                <h1>PITCH</h1>
+                <table align="center">
+                    <!-- ASPECTOS BÁSICOS -->
+                    <tr><td colspan="2"><h1>ASPECTOS BÁSICOS</h1></td></tr>
+                    <tr><td>Nombre de la iniciativa</td><td><textarea id="nombreIniciativa" style="resize:both;"></textarea></td></tr>
+                    <tr><td>Es (un producto (plataforma, aplicación, marketplace, ERP, CRM))</td><td><textarea id="tipoProducto" style="resize:both;"></textarea></td></tr>
+                    <tr><td>Para (tipo cliente/usuario)</td><td><textarea id="tipoCliente" style="resize:both;"></textarea></td></tr>
+                    <tr><td>Para (Beneficio clave)</td><td><textarea id="beneficioClave" style="resize:both;"></textarea></td></tr>
+            
+                    <!-- PROBLEMA -->
+                    <tr><td colspan="2"><h1>PROBLEMA</h1></td></tr>
+                    <tr><td>¿De qué se trata el problema?</td><td><textarea id="descripcionProblema" style="resize:both;"></textarea></td></tr>
+                    <tr><td>¿Quién está sufriendo el problema?</td><td><textarea id="quienSufre" style="resize:both;"></textarea></td></tr>
+                    <tr><td>¿Qué tan grande es el problema?</td><td><textarea id="magnitudProblema" style="resize:both;"></textarea></td></tr>
+            
+                    <!-- SOLUCIÓN -->
+                    <tr><td colspan="2"><h1>SOLUCIÓN</h1></td></tr>
+                    <tr><td>¿Qué es la solución?</td><td><textarea id="descripcionSolucion" style="resize:both;"></textarea></td></tr>
+                    <tr><td>¿Cuál es el producto o la tecnología que implementan?</td><td><textarea id="productoTecnologia" style="resize:both;"></textarea></td></tr>
+                    <tr><td>¿Cómo funciona?</td><td><textarea id="comoFunciona" style="resize:both;"></textarea></td></tr>
+            
+                    <!-- MODELO DE NEGOCIO -->
+                    <tr><td colspan="2"><h1>MODELO DE NEGOCIO</h1></td></tr>
+                    <tr><td>¿Cómo se financiará la iniciativa?</td><td><textarea id="financiamiento" style="resize:both;"></textarea></td></tr>
+                    <tr><td>¿Quiénes son los financiadores?</td><td><textarea id="financiadores" style="resize:both;"></textarea></td></tr>
+                    <tr><td>¿Cómo lo van a comunicar?</td><td><textarea id="comunicacion" style="resize:both;"></textarea></td></tr>
+            
+                    <!-- TRACCIÓN -->
+                    <tr><td colspan="2"><h1>TRACCIÓN</h1></td></tr>
+                    <tr><td>¿Cuáles son sus métricas clave?</td><td><textarea id="metricasClave" style="resize:both;"></textarea></td</tr>
+                    <tr><td>Medidas y progresión</td><td><textarea id="medidasProgresion" style="resize:both;"></textarea></td></tr>
+            
+                    <!-- EQUIPO -->
+                    <tr><td colspan="2"><h1>EQUIPO</h1></td></tr>
+                    <tr><td>¿Qué han aprendido hasta ahora?</td><td><textarea id="aprendizaje" style="resize:both;"></textarea></td></tr>
+                    <tr><td>¿Qué los hace el 'mejor equipo'?</td><td><textarea id="mejorEquipo" style="resize:both;"></textarea></td></tr>
+            
+                    <!-- PREGUNTAS -->
+                    <tr><td colspan="2"><h1>PREGUNTAS</h1></td></tr>
+                    <tr><td>¿A dónde quieren llegar?</td><td><textarea id="dondeLlegar" style="resize:both;"></textarea></td></tr>
+                    <tr><td>¿Qué necesitan? ¿Cuánto? ¿Para qué?</td><td><textarea id="queNecesitan" style="resize:both;"></textarea></td></tr>
+                    <tr><td>¿Cómo se desarrolla esta propuesta en entornos digitales?</td><td><textarea id="entornosDigitales" style="resize:both;"></textarea></td></tr>
+                </table>
+            
+                <button onclick="generarMensaje()">PITCH CONSOLIDADO</button>
+                <p id="mensajeSalida" style="margin: auto; width: 50%; text-align: center;"></p>
+            </div>
+            <script>
+              function generarMensaje() {
+                  var nombreIniciativa = document.getElementById("nombreIniciativa").value;
+                  var tipoProducto = document.getElementById("tipoProducto").value;
+                  var tipoCliente = document.getElementById("tipoCliente").value;
+                  var beneficioClave = document.getElementById("beneficioClave").value;
+                  var descripcionProblema = document.getElementById("descripcionProblema").value;
+                  var quienSufre = document.getElementById("quienSufre").value;
+                  var magnitudProblema = document.getElementById("magnitudProblema").value;
+                  var descripcionSolucion = document.getElementById("descripcionSolucion").value;
+                  var productoTecnologia = document.getElementById("productoTecnologia").value;
+                  var comoFunciona = document.getElementById("comoFunciona").value;
+                  var financiamiento = document.getElementById("financiamiento").value;
+                  var financiadores = document.getElementById("financiadores").value;
+                  var comunicacion = document.getElementById("comunicacion").value;
+                  var metricasClave = document.getElementById("metricasClave").value;
+                  var medidasProgresion = document.getElementById("medidasProgresion").value;
+                  var aprendizaje = document.getElementById("aprendizaje").value;
+                  var mejorEquipo = document.getElementById("mejorEquipo").value;
+                  var dondeLlegar = document.getElementById("dondeLlegar").value;
+                  var queNecesitan = document.getElementById("queNecesitan").value;
+                  var entornosDigitales = document.getElementById("entornosDigitales").value;
+          
+                  var mensaje = "ASPECTOS BÁSICOS\nNombre de la iniciativa: " + nombreIniciativa + "\nEs un: " + tipoProducto + "\nPara: " + tipoCliente + "\nBeneficio clave: " + beneficioClave+ "\n\nPROBLEMA\nDe qué se trata el problema: " + descripcionProblema + "\nQuién está sufriendo el problema: " + quienSufre + "\nQué tan grande es el problema: " + magnitudProblema
+                  + "\n\nSOLUCIÓN\nQué es la solución: " + descripcionSolucion + "\nCuál es el producto o la tecnología que implementan: " + productoTecnologia + "\nCómo funciona: " + comoFunciona
+                  + "\n\nMODELO DE NEGOCIO\nCómo se financiará la iniciativa: " + financiamiento + "\nQuiénes son los financiadores: " + financiadores + "\nCómo lo van a comunicar: " + comunicacion
+                  + "\n\nTRACCIÓN\nCuáles son sus métricas clave: " + metricasClave + "\nMedidas y progresión: " + medidasProgresion
+                  + "\n\nEQUIPO\nQué han aprendido hasta ahora: " + aprendizaje + "\nQué los hace el 'mejor equipo': " + mejorEquipo
+                  + "\n\nPREGUNTAS\nA dónde quieren llegar: " + dondeLlegar + "\nQué necesitan: " + queNecesitan + "\nCómo se desarrolla esta propuesta en entornos digitales: " + entornosDigitales;
+          
+                  document.getElementById("mensajeSalida").innerText = mensaje;
+              }
+          </script>
+                    
+
+              </div>   
+
+              <div class="slide">
+                <h1>Video</h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div>   
+
+              <div class="slide">
+                <h1>Preparación del pitch</h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div>   
+
+              <div class="slide">
+                <h1>Presentación de proyecto en Espacio inmersivo</h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div> 
+
+              <div class="slide">
+                <h1>Evaluación del proyecto</h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div>   
+
+              <div class="slide">
+                <h1>Certificado</h1>
+                <!-- contenido de la diapositiva 3 -->
+
+              </div>   
+
+
+
+
+
+<footer>
+  Creado por:Maryi Adriana Cadrazco Suárez
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+    <img alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/80x15.png" />
+  </a>
+  <br>
+  Esta obra está bajo una
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Licencia Creative Commons Atribución-NoComercial 4.0 Internacional</a>.
+</footer>
+
+</body>
+</html>
+
+              <button onclick="prevSlide()">Anterior</button>
+              <button onclick="nextSlide()">Siguiente</button>
+              
+              <!-- Aquí va el botón de guardar como PDF, visible en todas las diapositivas -->
+              <button id="saveAsPDF">Guardar como PDF</button>
+              
+              </body>
+              </html>
